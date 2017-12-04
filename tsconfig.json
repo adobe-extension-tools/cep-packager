@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es3",
+    "module": "commonjs",
+    "outDir": "./lib",
+    "allowJs": true,
+    "removeComments": true,
+    "jsx": "preserve",
+    "lib": ["es2015"],
+    "types": ["node"]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": []
+}

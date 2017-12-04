@@ -1,0 +1,27 @@
+{
+  "name": "cep-packager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2",
+    "shell-quote": "^1.6.1",
+    "zxp-sign-cmd": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.31",
+    "typescript": "^2.6.2"
+  },
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc",
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "bin": {
+    "cep-packager": "./lib/bin/cep-packager.js"
+  },
+  "author": "Koen Schmeets",
+  "license": "MIT"
+}
