@@ -1,9 +1,6 @@
 # dependencies
 /node_modules
 
-# production
-/lib
-
 # misc
 .DS_Store
 
