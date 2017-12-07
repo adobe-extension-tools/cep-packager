@@ -1,0 +1,15 @@
+pipeline:
+  build:
+    image: node:9.2.0-alpine
+    commands:
+      - npm install
+      - npm run build
+  npm:
+    image: plugins/npm
+    secrets: [ npm_username, npm_password, npm_email ]
+  notify:
+    image: plugins/slack
+    channel: dev
+    secrets: [ slack_webhook ]
+    when:
+      status: [ success, failure ]
