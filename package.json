@@ -1,6 +1,6 @@
 {
   "name": "cep-packager",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Create native macOS and Windows installers for your CEP",
   "main": "index.js",
   "dependencies": {
@@ -16,8 +16,7 @@
   },
   "scripts": {
     "start": "tsc -w",
-    "build": "tsc",
-    "postinstall": "node ./scripts/postinstall.js"
+    "build": "tsc"
   },
   "bin": {
     "cep-packager": "./lib/bin/cep-packager.js"
