@@ -64,10 +64,13 @@ function pkgbuild(opts) {
     '--version', quote([opts.version]),
     ...(opts.macOs && opts.macOs.identifier ?
       ['--sign', quote([opts.macOs.identifier])] : []),
-    quote([opts.paths.macOsInstallerFile])
+    quote([opts.paths.macOsInstallerFile]),
+    ' >'
   ].join(' ')
   const pkgbuildCmdResult = execSync(pkgbuildCmd).toString()
-  console.log(pkgbuildCmdResult)
+  console.log(pkgbuildCmdResult.split('\n').filter((line) => {
+    return line.indexOf('keychain') === -1
+  }).join('\n'))
 }
 
 function productbuild(opts) {
