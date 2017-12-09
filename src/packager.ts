@@ -5,7 +5,7 @@ import { sign, selfSignedCert } from 'zxp-sign-cmd'
 import { execSync } from 'child_process'
 import { createWindowsInstallerOnMacOs, createMacOsInstallerOnMacOs } from './packager.macos'
 import { createWindowsInstallerOnWindows } from './packager.windows'
-import { rmrf } from './utils'
+import { rmrf, mkdirp } from './utils'
 
 export async function createInstallers(opts) {
   opts.paths = opts.paths || {}
@@ -61,6 +61,7 @@ async function createZXP(opts) {
       password: opts.zxp.certPassword
     })
     console.log('Signed package successfully')
+    mkdirp(path.dirname(opts.zxp.dest))
     execSync(`cp "${opts.paths.zxpFile}" "${opts.zxp.dest}"`)
   } catch (err) {
     console.log(err)
