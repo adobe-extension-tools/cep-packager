@@ -66,14 +66,7 @@ function pkgbuild(opts) {
       ['--sign', quote([opts.macOs.identifier])] : []),
     quote([opts.paths.macOsInstallerFile])
   ].join(' ')
-  try {
-    const pkgbuildCmdResult = execSync(pkgbuildCmd).toString()
-    console.log(pkgbuildCmdResult.split('\n').filter((line) => {
-      return line.indexOf('keychain') === -1
-    }).join('\n'))
-  } catch (err) {
-    console.log('Error while creating .pkg')
-  }
+  execSync(pkgbuildCmd, { stdio: 'ignore' })
 }
 
 function productbuild(opts) {
