@@ -6,6 +6,7 @@ import { quote } from 'shell-quote'
 import postinstallTemplate from './templates/macos/postinstall'
 import distibutionTemplate from './templates/macos/distribution.xml'
 import nsisTemplate from './templates/windows/nsis.conf'
+import * as signcode from 'signcode'
 
 export function createMacOsInstallerOnMacOs(opts) {
   createMacOsMeta(opts)
@@ -91,6 +92,7 @@ export async function createWindowsInstallerOnMacOs(opts) {
   createWindowsInstallerFiles(opts)
   mkdirp(path.dirname(opts.windows.dest))
   makensis(opts)
+  signexe(opts)
 }
 
 function createWindowsMeta(opts) {
@@ -119,4 +121,23 @@ function makensis(opts) {
     '/usr/local/bin/makensis', quote([opts.paths.windowsNsisConfFile])
   ].join(' ')).toString()
   console.log(makensisResult)
+}
+
+function signexe(opts) {
+  if (opts.windows.cert) {
+    console.log('-> signexe')
+    var options = {
+      cert: opts.windows.cert,
+      password: opts.windows.certPassword,
+      overwrite: true,
+      path: opts.windows.dest
+    }
+    signcode.sign(options, function (error) {
+      if (error) {
+        console.error('Signing failed', error.message)
+      } else {
+        console.log(options.path + ' is now signed')
+      }
+    })
+  }
 }

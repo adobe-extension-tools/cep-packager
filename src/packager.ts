@@ -41,8 +41,8 @@ export async function createInstallers(opts) {
 async function createZXP(opts) {
   try {
     if (!opts.zxp) opts.zxp = {}
-    if (!opts.zxp.certPassword) opts.zxp.certPassword = 'password'
     if (!opts.zxp.cert) {
+      if (!opts.zxp.certPassword) opts.zxp.certPassword = 'password'
       opts.zxp.cert = path.join(opts.paths.cwd, 'zxp-cert.p12')
       const certRes = await selfSignedCertPromise({
         country: opts.zxp.certCountry || 'US',
@@ -58,7 +58,8 @@ async function createZXP(opts) {
       input: opts.src,
       output: opts.paths.zxpFile,
       cert: opts.zxp.cert,
-      password: opts.zxp.certPassword
+      password: opts.zxp.certPassword,
+      timestamp: opts.zxp.timestamp
     })
     console.log('Signed package successfully')
     mkdirp(path.dirname(opts.zxp.dest))
