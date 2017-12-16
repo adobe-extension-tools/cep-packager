@@ -25,7 +25,7 @@ function createMacOsMeta(opts) {
 function createMacOsTemplates(opts) {
   console.log('-> createMacOsTemplates')
   // add distribution.xml
-  writeFileSync(opts.paths.macOsDistributionXmlFile, distibutionTemplate(opts))
+  writeFileSync(opts.paths.macOsDistributionXmlFile, opts.distibutionTemplate ? opts.distibutionTemplate(opts) : distibutionTemplate(opts))
 }
 
 function createMacOsInstallerFiles(opts) {
@@ -38,7 +38,7 @@ function createMacOsScripts(opts) {
   console.log('-> createMacOsScripts')
   mkdirp(opts.paths.macOsScripts)
   // add postinstall
-  writeFileSync(opts.paths.macOsPostinstallFile, postinstallTemplate(opts))
+  writeFileSync(opts.paths.macOsPostinstallFile, opts.postinstallTemplate ? opts.postinstallTemplate(opts) : postinstallTemplate(opts))
   chmodSync(opts.paths.macOsPostinstallFile, '0777')
   // add bundle.zxp
   cp(opts.paths.zxpFile, opts.paths.macOsZxpFile)
@@ -102,7 +102,7 @@ function createWindowsMeta(opts) {
 
 function createWindowsTemplates(opts) {
   console.log('-> createWindowsTemplates')
-  writeFileSync(opts.paths.windowsNsisConfFile, nsisTemplate(opts))
+  writeFileSync(opts.paths.windowsNsisConfFile, opts.nsisTemplate ? opts.nsisTemplate(opts) : nsisTemplate(opts))
 }
 
 function createWindowsInstallerFiles(opts) {
