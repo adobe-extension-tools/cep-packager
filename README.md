@@ -48,6 +48,56 @@ Or, add to your `package.json`'s scripts section:
 }
 ```
 
+Then you can run the packager like this:
+
+```shell
+npm run package
+```
+
+## CLI usage
+
+Instead of using the `cep-config.js` configuration file you can also use CLI arguments or environment variables.
+For this, it is recommended to install `cep-packager` globally like this:
+
+```shell
+npm install -g cep-packager
+```
+
+Basic example:
+
+```shell
+cep-packager \
+	--name testpackage \
+	--bundle-id com.test.testpackage \
+	--version 0.0.1 \
+	--macos-resources $PWD/resources/macos \
+	--windows-resources $PWD/resources/windows \
+	--macos-dest $PWD/0.0.1.pkg \
+	--windows-dest $PWD/0.0.1.exe \
+	./testpackage
+```
+
+Example with signing:
+
+```shell
+cep-packager \
+	--name testpackage \
+	--bundle-id com.test.testpackage \
+	--version 0.0.1 \
+	--macos-resources $PWD/resources/macos \
+	--windows-resources $PWD/resources/windows \
+	--macos-dest $PWD/0.0.1.pkg \
+	--windows-dest $PWD/0.0.1.exe \
+	--windows-cert path/to/cert.p12
+	--windows-cert-password passwordofp12file
+	--zxp-cert path/to/cert.p12
+	--zxp-cert-password passwordofp12file
+	--macos-keychain login.keychain
+	--macos-keychain-password loginkeychainpassword
+	--macos-identifier "Developer ID Installer: Your Name"
+	./testpackage
+```
+
 ## develop
 
 ```shell

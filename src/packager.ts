@@ -62,8 +62,10 @@ async function createZXP(opts) {
       timestamp: opts.zxp.timestamp
     })
     console.log('Signed package successfully')
-    mkdirp(path.dirname(opts.zxp.dest))
-    execSync(`cp "${opts.paths.zxpFile}" "${opts.zxp.dest}"`)
+    if (opts.zxp.dest) {
+      mkdirp(path.dirname(opts.zxp.dest))
+      execSync(`cp "${opts.paths.zxpFile}" "${opts.zxp.dest}"`)
+    }
   } catch (err) {
     console.log(err)
   }
