@@ -29,7 +29,11 @@ export async function createInstallers(opts) {
   opts.paths.windowsNsisConfFile = path.join(opts.paths.windowsMeta, 'nsis.conf')
   rmrf(opts.paths.cwd)
   mkdirSync(opts.paths.cwd)
-  await createZXP(opts)
+  if (opts.src.indexOf('.zxp') > -1) {
+    opts.paths.zxpFile = opts.src.indexOf('.zxp')
+  } else {
+    await createZXP(opts)
+  }
   if (platform() === 'darwin') {
     createWindowsInstallerOnMacOs(opts)
     createMacOsInstallerOnMacOs(opts)

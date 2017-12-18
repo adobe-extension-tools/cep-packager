@@ -1,6 +1,6 @@
 {
   "name": "cep-packager",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Create native macOS and Windows installers for your CEP",
   "main": "index.js",
   "dependencies": {

@@ -4,8 +4,10 @@ import { readFileSync, writeFileSync, chmodSync } from 'fs'
 import { copyAndReplace, cp, cpr, mkdirp } from './utils'
 import { quote } from 'shell-quote'
 import postinstallTemplate from './templates/macos/postinstall'
+import postinstallCsTemplate from './templates/macos/postinstallcs'
 import distibutionTemplate from './templates/macos/distribution.xml'
 import nsisTemplate from './templates/windows/nsis.conf'
+import nsisCsTemplate from './templates/windows/nsiscs.conf'
 import * as signcode from 'signcode'
 
 export function createMacOsInstallerOnMacOs(opts) {
@@ -38,7 +40,12 @@ function createMacOsScripts(opts) {
   console.log('-> createMacOsScripts')
   mkdirp(opts.paths.macOsScripts)
   // add postinstall
-  writeFileSync(opts.paths.macOsPostinstallFile, opts.postinstallTemplate ? opts.postinstallTemplate(opts) : postinstallTemplate(opts))
+  writeFileSync(
+    opts.paths.macOsPostinstallFile,
+    opts.postinstallTemplate
+      ? opts.postinstallTemplate(opts)
+      : (opts.cs ? postinstallCsTemplate(opts) : postinstallTemplate(opts))
+  )
   chmodSync(opts.paths.macOsPostinstallFile, '0777')
   // add bundle.zxp
   cp(opts.paths.zxpFile, opts.paths.macOsZxpFile)
@@ -102,7 +109,12 @@ function createWindowsMeta(opts) {
 
 function createWindowsTemplates(opts) {
   console.log('-> createWindowsTemplates')
-  writeFileSync(opts.paths.windowsNsisConfFile, opts.nsisTemplate ? opts.nsisTemplate(opts) : nsisTemplate(opts))
+  writeFileSync(
+    opts.paths.windowsNsisConfFile,
+    opts.nsisTemplate
+      ? opts.nsisTemplate(opts)
+      : (opts.cs ? nsisCsTemplate(opts) : nsisTemplate(opts))
+  )
 }
 
 function createWindowsInstallerFiles(opts) {
