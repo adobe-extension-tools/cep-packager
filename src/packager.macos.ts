@@ -50,8 +50,10 @@ function createMacOsScripts(opts) {
   // add bundle.zxp
   cp(opts.paths.zxpFile, opts.paths.macOsZxpFile)
   // add ExManCmd
-  const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_mac')
-  cpr(exManCmdSrc, opts.paths.macOsScripts)
+  if (!opts.cs) {
+    const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_mac')
+    cpr(exManCmdSrc, opts.paths.macOsScripts)
+  }
 }
 
 function pkgbuild(opts) {
@@ -120,8 +122,10 @@ function createWindowsTemplates(opts) {
 function createWindowsInstallerFiles(opts) {
   console.log('-> createWindowsInstallerFiles')
   mkdirp(opts.paths.windowsInstallerFiles)
-  const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_win')
-  cpr(exManCmdSrc, opts.paths.windowsInstallerFiles)
+  if (!opts.cs) {
+    const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_win')
+    cpr(exManCmdSrc, opts.paths.windowsInstallerFiles)
+  }
   cp(opts.paths.zxpFile, opts.paths.windowsZxpFile)
 }
 
