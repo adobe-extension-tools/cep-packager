@@ -5,7 +5,7 @@ Name "${opts.name}"
 BrandingText "${opts.name}"
 OutFile "${opts.windows.dest}"
 SetCompressor /SOLID lzma
-InstallDir "C:\Program Files (x86)\Common Files\Adobe\CEPServiceManager${opts.cs}\extensions\${opts.bundleId}"
+InstallDir "C:\Program Files (x86)\Common Files\Adobe\CEPServiceManager${opts.cs}\extensions\\${opts.bundleId}"
 
 !define MUI_ABORTWARNING
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${opts.windows.resources}/leftimage.bmp"
