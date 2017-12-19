@@ -30,7 +30,7 @@ export async function createInstallers(opts) {
   rmrf(opts.paths.cwd)
   mkdirSync(opts.paths.cwd)
   if (opts.src.indexOf('.zxp') > -1) {
-    opts.paths.zxpFile = opts.src.indexOf('.zxp')
+    opts.paths.zxpFile = opts.src
   } else {
     await createZXP(opts)
   }
