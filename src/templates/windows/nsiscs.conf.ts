@@ -5,7 +5,7 @@ Name "${opts.name}"
 BrandingText "${opts.name}"
 OutFile "${opts.windows.dest}"
 SetCompressor /SOLID lzma
-InstallDir "C:\Program Files (x86)\Common Files\Adobe\CEPServiceManager${opts.cs}\extensions\\${opts.bundleId}"
+InstallDir "C:\\Program Files (x86)\\Common Files\\Adobe"
 
 !define MUI_ABORTWARNING
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${opts.windows.resources}/leftimage.bmp"
@@ -27,8 +27,17 @@ FunctionEnd
 
 Section "Application" SecApplication
   SetShellVarContext all
-  SetOutPath "$INSTDIR"
-  RMDir /r $INSTDIR
-  File /r "${opts.paths.windowsInstallerFiles}/*"
+  \${If} \${FileExists} "$INSTDIR\\CEPServiceManager5\\extensions"
+    SetOutPath "$INSTDIR\\CEPServiceManager5\\extensions\\${opts.bundleId}"
+    RMDir /r $OUTDIR
+    File /r "${opts.paths.windowsInstallerFiles}/*"
+  \${ElseIf} \${FileExists} "$INSTDIR\\CEPServiceManager6\\extensions"
+    SetOutPath "$INSTDIR\\CEPServiceManager6\\extensions\\${opts.bundleId}"
+    RMDir /r $OUTDIR
+    File /r "${opts.paths.windowsInstallerFiles}/*"
+  \${Else}
+    MessageBox MB_OK "CS app not found"
+    Abort
+  \${EndIf}
 SectionEnd
 `
