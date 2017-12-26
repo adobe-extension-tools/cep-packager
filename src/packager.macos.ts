@@ -76,17 +76,28 @@ function pkgbuild(opts) {
       ['--sign', quote([opts.macOs.identifier])] : []),
     quote([opts.paths.macOsInstallerFile])
   ].join(' ')
-  execSync(pkgbuildCmd, { stdio: 'ignore' })
+  const stdioOpts = opts.debug ? undefined : { stdio: 'ignore' }
+  const pkgbuildCmdResult = execSync(pkgbuildCmd, stdioOpts)
+  opts.debug && console.log(pkgbuildCmdResult.toString())
 }
 
 function productbuild(opts) {
   console.log('-> productbuild')
   mkdirp(path.dirname(opts.macOs.dest))
   let productbuildCmd = [
+    ...(opts.macOs.keychain || opts.macOs.keychainPassword ? [
+      'security', '-v', 'unlock-keychain',
+      ...(opts.macOs.keychainPassword ?
+        ['-p', quote([opts.macOs.keychainPassword])] : []),
+      quote([opts.macOs.keychain || 'login.keychain']),
+      '&&',
+    ] : []),
     'productbuild',
     '--distribution', quote([opts.paths.macOsDistributionXmlFile]),
     '--package-path', quote([opts.paths.macOsMeta]),
     '--resources', quote([opts.macOs.resources]),
+    ...(opts.macOs && opts.macOs.identifier ?
+      ['--sign', quote([opts.macOs.identifier])] : []),
     quote([opts.macOs.dest])
   ].join(' ')
   console.log(productbuildCmd)
