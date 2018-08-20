@@ -27,18 +27,23 @@ export async function createInstallers(opts) {
   opts.paths.windowsZxpFile = path.join(opts.paths.windowsInstallerFiles, 'bundle.zxp')
   opts.paths.macOsInstallerFile = path.join(opts.paths.macOsMeta, 'installer.pkg')
   opts.paths.windowsNsisConfFile = path.join(opts.paths.windowsMeta, 'nsis.conf')
-  rmrf(opts.paths.cwd)
-  mkdirSync(opts.paths.cwd)
-  if (opts.src.indexOf('.zxp') > -1) {
-    opts.paths.zxpFile = opts.src
-  } else {
-    await createZXP(opts)
-  }
-  if (platform() === 'darwin') {
-    createWindowsInstallerOnMacOs(opts)
-    createMacOsInstallerOnMacOs(opts)
-  } else {
-    createWindowsInstallerOnWindows(opts)
+  try {
+    rmrf(opts.paths.cwd)
+    mkdirSync(opts.paths.cwd)
+    if (opts.src.indexOf('.zxp') > -1) {
+      opts.paths.zxpFile = opts.src
+    } else {
+      await createZXP(opts)
+    }
+    if (platform() === 'darwin') {
+      createWindowsInstallerOnMacOs(opts)
+      createMacOsInstallerOnMacOs(opts)
+    } else {
+      createWindowsInstallerOnWindows(opts)
+    }
+  } catch (err) {
+    console.error(err.message)
+    process.exit(1)
   }
 }
 
