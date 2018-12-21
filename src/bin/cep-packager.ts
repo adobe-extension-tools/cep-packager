@@ -12,7 +12,7 @@ function run() {
   const cepConfigExists = fs.existsSync(cepConfigPath)
   if (cepConfigExists) {
     const config = require(cepConfigPath)
-    return createInstallers(config)
+    return createInstallers(config.packager)
   } else if (packageJson.cep) {
     const packageJson = require(`${projectDir}/package.json`)
     const config = packageJson.cep.installers || {}
