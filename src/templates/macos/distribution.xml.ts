@@ -4,6 +4,7 @@ export default (opts) => `<?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="1">
   <pkg-ref id="${opts.bundleId}"/>
   <options customize="never" require-scripts="false"/>
+  <domains enable_currentUserHome="true" enable_localSystem="true" />
   <choices-outline>
     <line choice="${opts.bundleId}"/>
   </choices-outline>
