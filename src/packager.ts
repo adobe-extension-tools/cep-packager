@@ -37,7 +37,7 @@ export async function createInstallers(opts) {
       await createZXP(opts)
     }
     mkdirSync(opts.paths.zxpContents)
-    execSync(`unzip "${opts.paths.zxpFile}" "${opts.paths.zxpContents}"`)
+    execSync(`unzip "${opts.paths.zxpFile}" -d "${opts.paths.zxpContents}"`)
     if (platform() === 'darwin') {
       createWindowsInstallerOnMacOs(opts)
       createMacOsInstallerOnMacOs(opts)
