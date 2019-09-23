@@ -11,7 +11,7 @@ import nsisCsTemplate from './templates/windows/nsiscs.conf'
 import * as signcode from 'signcode'
 
 export function createMacOsInstallerOnMacOs(opts) {
-  // createMacOsMeta(opts)
+  createMacOsMeta(opts)
   createMacOsTemplates(opts)
   createMacOsInstallerFiles(opts)
   // createMacOsScripts(opts)
