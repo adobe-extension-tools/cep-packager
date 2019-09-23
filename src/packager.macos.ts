@@ -77,6 +77,7 @@ function pkgbuild(opts) {
     quote([opts.paths.macOsInstallerFile])
   ].join(' ')
   const stdioOpts = opts.debug ? undefined : { stdio: 'ignore' }
+  opts.debug && console.log(pkgbuildCmd)
   const pkgbuildCmdResult = execSync(pkgbuildCmd, stdioOpts)
   opts.debug && console.log(pkgbuildCmdResult.toString())
 }
@@ -100,9 +101,9 @@ function productbuild(opts) {
       ['--sign', quote([opts.macOs.identifier])] : []),
     quote([opts.macOs.dest])
   ].join(' ')
-  console.log(productbuildCmd)
+  opts.debug && console.log(productbuildCmd)
   const productbuildCmdResult = execSync(productbuildCmd).toString()
-  console.log(productbuildCmdResult)
+  opts.debug && console.log(productbuildCmdResult)
 }
 
 export async function createWindowsInstallerOnMacOs(opts) {
@@ -147,7 +148,7 @@ function makensis(opts) {
     '&&',
     '/usr/local/bin/makensis', quote([opts.paths.windowsNsisConfFile])
   ].join(' ')).toString()
-  console.log(makensisResult)
+  opts.debug && console.log(makensisResult)
 }
 
 function signexe(opts) {
