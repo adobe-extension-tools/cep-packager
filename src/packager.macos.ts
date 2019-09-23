@@ -14,7 +14,7 @@ export function createMacOsInstallerOnMacOs(opts) {
   createMacOsMeta(opts)
   createMacOsTemplates(opts)
   createMacOsInstallerFiles(opts)
-  // createMacOsScripts(opts)
+  createMacOsScripts(opts)
   pkgbuild(opts)
   productbuild(opts)
 }
