@@ -1,5 +1,11 @@
 export default (opts) => `#!/bin/bash
-`
+echo "Removing previous zxp installer if any..."
+rm -rf "$HOME/Library/Application\ Support/zxpinstaller" || true
+echo "Copying new zxp installer if any..."
+cp -r "./ExManCmd_mac $HOME/Library/Application\ Support/zxpinstaller"
+echo "Fixing zxp installer permissions..."
+chown -R $USER:staff "$HOME/Library/Application\ Support/zxpinstaller"
+echo "Done."`
 
 // export default (opts) => `#!/bin/bash
 
