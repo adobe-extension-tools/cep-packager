@@ -11,10 +11,10 @@ import nsisCsTemplate from './templates/windows/nsiscs.conf'
 import * as signcode from 'signcode'
 
 export function createMacOsInstallerOnMacOs(opts) {
-  createMacOsMeta(opts)
+  // createMacOsMeta(opts)
   createMacOsTemplates(opts)
   createMacOsInstallerFiles(opts)
-  createMacOsScripts(opts)
+  // createMacOsScripts(opts)
   pkgbuild(opts)
   productbuild(opts)
 }
@@ -67,9 +67,9 @@ function pkgbuild(opts) {
       '&&',
     ] : []),
     '/usr/bin/pkgbuild',
-    '--root', quote([opts.paths.macOsInstallerFiles]),
+    '--root', quote([opts.paths.zxpContents]),
     '--scripts', quote([opts.paths.macOsScripts]),
-    '--install-location', quote([`./.${opts.bundleId}-installer`]),
+    '--install-location', quote([`Library/Application Support/Adobe/CEP/extensions/${opts.bundleId}`]),
     '--identifier', quote([opts.bundleId]),
     '--version', quote([opts.version]),
     ...(opts.macOs && opts.macOs.identifier ?

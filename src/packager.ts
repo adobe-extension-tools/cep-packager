@@ -27,6 +27,7 @@ export async function createInstallers(opts) {
   opts.paths.windowsZxpFile = path.join(opts.paths.windowsInstallerFiles, 'bundle.zxp')
   opts.paths.macOsInstallerFile = path.join(opts.paths.macOsMeta, 'installer.pkg')
   opts.paths.windowsNsisConfFile = path.join(opts.paths.windowsMeta, 'nsis.conf')
+  opts.paths.zxpContents = path.join(opts.paths.cwd, 'zxpcontents')
   try {
     rmrf(opts.paths.cwd)
     mkdirSync(opts.paths.cwd)
@@ -35,6 +36,7 @@ export async function createInstallers(opts) {
     } else {
       await createZXP(opts)
     }
+    execSync(`unzip "${opts.paths.zxpFile}" "${opts.paths.zxpContents}"`)
     if (platform() === 'darwin') {
       createWindowsInstallerOnMacOs(opts)
       createMacOsInstallerOnMacOs(opts)
