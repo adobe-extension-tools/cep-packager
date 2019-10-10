@@ -1,1 +1,3 @@
-export default (opts) => `#!/bin/bash`
+export default (opts) => `#!/bin/bash
+echo "Done."
+`
