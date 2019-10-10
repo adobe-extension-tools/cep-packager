@@ -1,11 +1,11 @@
 export default (opts) => `!include "MUI2.nsh"
 !include "FileFunc.nsh"
+RequestExecutionLevel admin
 
 Name "${opts.name}"
 BrandingText "${opts.name}"
 OutFile "${opts.windows.dest}"
 SetCompressor /SOLID lzma
-InstallDir "$PLUGINSDIR"
 
 !define MUI_ABORTWARNING
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${opts.windows.resources}/leftimage.bmp"
@@ -21,14 +21,10 @@ InstallDir "$PLUGINSDIR"
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_LANGUAGE "English"
 
-Function .onInit
-	InitPluginsDir
-FunctionEnd
-
 Section "Application" SecApplication
 	SetShellVarContext all
-	SetOutPath "$PLUGINSDIR"
+	SetOutPath "$COMMONFILES\\Adobe\\CEP\\extensions\\${opts.bundleId}"
+	RMDir /r "$COMMONFILES\\Adobe\\CEP\\extensions\\${opts.bundleId}"
 	File /r "${opts.paths.windowsInstallerFiles}/*"
-	ExecWait '"$PLUGINSDIR\\ExManCmd_win\\ExManCmd.exe" /install bundle.zxp'
 SectionEnd
 `
