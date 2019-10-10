@@ -25,7 +25,7 @@ export async function createInstallers(opts) {
   opts.paths.macOsPostinstallFile = path.join(opts.paths.macOsScripts, 'postinstall')
   opts.paths.macOsZxpFile = path.join(opts.paths.macOsScripts, 'bundle.zxp')
   opts.paths.windowsZxpFile = path.join(opts.paths.windowsInstallerFiles, 'bundle.zxp')
-  opts.paths.macOsInstallerFile = path.join(opts.paths.macOsMeta, 'installer.pkg')
+  opts.paths.macOsInstallerFile = path.join(opts.paths.macOsMeta, `installer.pkg`)
   opts.paths.windowsNsisConfFile = path.join(opts.paths.windowsMeta, 'nsis.conf')
   opts.paths.zxpContents = path.join(opts.paths.cwd, 'zxpcontents')
   try {

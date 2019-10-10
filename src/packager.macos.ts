@@ -47,13 +47,6 @@ function createMacOsScripts(opts) {
       : (opts.cs ? postinstallCsTemplate(opts) : postinstallTemplate(opts))
   )
   chmodSync(opts.paths.macOsPostinstallFile, '0777')
-  // add bundle.zxp
-  cp(opts.paths.zxpFile, opts.paths.macOsZxpFile)
-  // add ExManCmd
-  if (!opts.cs) {
-    const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_mac')
-    cpr(exManCmdSrc, opts.paths.macOsScripts)
-  }
 }
 
 function pkgbuild(opts) {
@@ -134,12 +127,8 @@ function createWindowsTemplates(opts) {
 function createWindowsInstallerFiles(opts) {
   console.log('-> createWindowsInstallerFiles')
   mkdirp(opts.paths.windowsInstallerFiles)
-  // if (!opts.cs) {
-  //   const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_win')
-  //   cpr(exManCmdSrc, opts.paths.windowsInstallerFiles)
-  // }
   cp(opts.paths.zxpFile, opts.paths.windowsZxpFile)
-  execSync(`cd "${opts.paths.windowsInstallerFiles}" && unzip "${opts.paths.windowsZxpFile}" && rm bundle.zxp`)
+  execSync(`cd "${opts.paths.windowsInstallerFiles}" && unzip "${opts.paths.windowsZxpFile}" && rm "${opts.paths.windowsZxpFile}"`)
 }
 
 function makensis(opts) {
