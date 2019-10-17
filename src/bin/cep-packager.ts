@@ -83,12 +83,12 @@ function run() {
     `)
       process.exit(1)
     }
-
+    const src = argv['_'].length && argv['_'][0]
     return createInstallers({
       name: argv['name'] || process.env.PACKAGE_NAME,
       bundleId: argv['bundle-id'] ||process.env.PACKAGE_BUNDLE_ID,
       version: argv['version'] || process.env.PACKAGE_VERSION,
-      src: argv['_'] || process.env.PACKAGE_SRC,
+      src: src || process.env.PACKAGE_SRC,
       zxp: {
         cert: argv['zxp-cert'] || process.env.PACKAGE_ZXP_CERT,
         certPassword: argv['zxp-cert-password'] || process.env.PACKAGE_ZXP_CERT_PASSWORD,

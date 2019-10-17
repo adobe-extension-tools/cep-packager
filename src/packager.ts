@@ -64,7 +64,7 @@ async function createZXP(opts) {
         output: opts.zxp.cert,
         password: opts.zxp.certPassword
       })
-      console.log('Created self-signed certificate successfully')
+      console.log(certRes)
     }
     const signRes = await signPromise({
       input: opts.src,
@@ -73,7 +73,7 @@ async function createZXP(opts) {
       password: opts.zxp.certPassword,
       timestamp: opts.zxp.timestamp
     })
-    console.log('Signed package successfully')
+    console.log(signRes)
     if (opts.zxp.dest) {
       mkdirp(path.dirname(opts.zxp.dest))
       execSync(`cp "${opts.paths.zxpFile}" "${opts.zxp.dest}"`)
