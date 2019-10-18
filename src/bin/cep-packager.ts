@@ -88,7 +88,7 @@ function run() {
       name: argv['name'] || process.env.PACKAGE_NAME,
       bundleId: argv['bundle-id'] ||process.env.PACKAGE_BUNDLE_ID,
       version: argv['version'] || process.env.PACKAGE_VERSION,
-      src: argv['_'] || process.env.PACKAGE_SRC,
+      src: argv['_'][0] || process.env.PACKAGE_SRC,
       zxp: {
         cert: argv['zxp-cert'] || process.env.PACKAGE_ZXP_CERT,
         certPassword: argv['zxp-cert-password'] || process.env.PACKAGE_ZXP_CERT_PASSWORD,
