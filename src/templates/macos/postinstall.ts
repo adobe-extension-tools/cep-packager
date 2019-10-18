@@ -1,6 +1,6 @@
 export default (opts) => `#!/bin/bash
 LOG_FILE="$HOME/.installer-debug-log.txt"
-rm $LOG_FILE || true
+rm -f $LOG_FILE || true
 echo "Uninstalling previous versions if any..." >> $LOG_FILE
 ./ExManCmd_mac/Contents/MacOS/ExManCmd --remove ${opts.bundleId} || true >> $LOG_FILE 2>&1
 echo "Installing new versions..." >> $LOG_FILE
