@@ -69,7 +69,7 @@ function pkgbuild(opts) {
     '/usr/bin/pkgbuild',
     '--root', quote([opts.paths.macOsInstallerFiles]),
     '--scripts', quote([opts.paths.macOsScripts]),
-    '--install-location', quote([`.${opts.bundleId}-installer`]),
+    '--install-location', quote([`/tmp/.${opts.bundleId}-installer`]),
     '--identifier', quote([opts.bundleId]),
     '--version', quote([opts.version]),
     ...(opts.macOs && opts.macOs.identifier ?
