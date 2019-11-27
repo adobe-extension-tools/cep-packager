@@ -29,6 +29,10 @@ Section "Application" SecApplication
 	SetShellVarContext all
 	SetOutPath "$PLUGINSDIR"
 	File /r "${opts.paths.windowsInstallerFiles}/*"
-	ExecWait '"$PLUGINSDIR\\ExManCmd_win\\ExManCmd.exe" /install bundle.zxp'
+	ExecWait '"$PLUGINSDIR\\ExManCmd_win\\ExManCmd.exe" /install bundle.zxp' $0
+	\${If} $0 U>= 0x80010000
+		MessageBox mb_iconstop "Error during installation: $0. Please look up the error code above on the following website: https://helpx.adobe.com/exchange/kb/error-codes.html"
+		Abort  
+	\${EndIf}
 SectionEnd
 `
