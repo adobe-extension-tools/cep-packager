@@ -72,6 +72,7 @@ function pkgbuild(opts) {
     '--scripts', quote([opts.paths.macOsScripts]),
     '--install-location', quote([`/tmp/.${opts.bundleId}-installer`]),
     '--identifier', quote([opts.bundleId]),
+    '--timestamp',
     '--version', quote([opts.version]),
     ...(opts.macOs && opts.macOs.identifier ?
       ['--sign', quote([opts.macOs.identifier])] : []),
@@ -94,6 +95,7 @@ function productbuild(opts) {
       '&&',
     ] : []),
     'productbuild',
+    '--timestamp',
     '--distribution', quote([opts.paths.macOsDistributionXmlFile]),
     '--package-path', quote([opts.paths.macOsMeta]),
     '--resources', quote([opts.macOs.resources]),
