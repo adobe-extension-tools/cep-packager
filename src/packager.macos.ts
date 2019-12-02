@@ -53,7 +53,7 @@ function createMacOsScripts(opts) {
   if (!opts.cs) {
     const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_mac.zip')
     // cpr(exManCmdSrc, opts.paths.macOsScripts)
-    execSync(`unzip "${exManCmdSrc}" -d "${opts.paths.macOsScripts}"`)
+    execSync(`unzip "${exManCmdSrc}" -d "${opts.paths.macOsScripts}/ExManCmd_mac"`)
   }
 }
 
@@ -137,7 +137,7 @@ function createWindowsInstallerFiles(opts) {
   if (!opts.cs) {
     const exManCmdSrc = path.join(__dirname, '../vendor/ExManCmd_win.zip')
     // cpr(exManCmdSrc, opts.paths.windowsInstallerFiles)
-    execSync(`unzip "${exManCmdSrc}" -d "${opts.paths.windowsInstallerFiles}"`)
+    execSync(`unzip "${exManCmdSrc}" -d "${opts.paths.windowsInstallerFiles}/ExManCmd_win"`)
   }
   cp(opts.paths.zxpFile, opts.paths.windowsZxpFile)
 }
