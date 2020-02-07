@@ -80,7 +80,7 @@ function pkgbuild(opts) {
     quote([opts.paths.macOsInstallerFile])
   ].join(' ')
   opts.debug && console.log(pkgbuildCmd)
-  const stdioOpts = opts.debug ? undefined : { stdio: 'ignore' }
+  const stdioOpts = opts.debug ? {stdio: 'inherit'} : { stdio: 'ignore' }
   const pkgbuildCmdResult = execSync(pkgbuildCmd, stdioOpts)
   opts.debug && console.log(pkgbuildCmdResult.toString())
 }
