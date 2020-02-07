@@ -60,7 +60,7 @@ function createMacOsScripts(opts) {
 function pkgbuild(opts) {
   console.log('-> pkgbuild')
   let pkgbuildCmd = [
-    ...(opts.macOs.keychain || opts.macOs.keychainPassword ? [
+    ...((opts.macOs.keychain || opts.macOs.keychainPassword) && opts.unlockKeychain !== false ? [
       'security', '-v', 'unlock-keychain',
       ...(opts.macOs.keychainPassword ?
         ['-p', quote([opts.macOs.keychainPassword])] : []),
@@ -78,6 +78,7 @@ function pkgbuild(opts) {
       ['--sign', quote([opts.macOs.identifier])] : []),
     quote([opts.paths.macOsInstallerFile])
   ].join(' ')
+  opts.debug && console.log(pkgbuildCmd)
   const stdioOpts = opts.debug ? undefined : { stdio: 'ignore' }
   const pkgbuildCmdResult = execSync(pkgbuildCmd, stdioOpts)
   opts.debug && console.log(pkgbuildCmdResult.toString())
@@ -87,7 +88,7 @@ function productbuild(opts) {
   console.log('-> productbuild')
   mkdirp(path.dirname(opts.macOs.dest))
   let productbuildCmd = [
-    ...(opts.macOs.keychain || opts.macOs.keychainPassword ? [
+    ...((opts.macOs.keychain || opts.macOs.keychainPassword) && opts.unlockKeychain !== false ? [
       'security', '-v', 'unlock-keychain',
       ...(opts.macOs.keychainPassword ?
         ['-p', quote([opts.macOs.keychainPassword])] : []),
@@ -103,9 +104,9 @@ function productbuild(opts) {
       ['--sign', quote([opts.macOs.identifier])] : []),
     quote([opts.macOs.dest])
   ].join(' ')
-  console.log(productbuildCmd)
+  opts.debug && console.log(productbuildCmd)
   const productbuildCmdResult = execSync(productbuildCmd).toString()
-  console.log(productbuildCmdResult)
+  opts.debug && console.log(productbuildCmdResult)
 }
 
 export async function createWindowsInstallerOnMacOs(opts) {
