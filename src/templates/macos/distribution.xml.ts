@@ -15,6 +15,7 @@ export default (opts) => `<?xml version="1.0" encoding="utf-8"?>
   <welcome mime-type="text/html" file="WELCOME.html"/>
   <license mime-type="text/html" file="LICENSE.html"/>
   <background file="background.png" alignment="bottomleft" scaling="none"/>
+  <background-darkAqua file="background-darkAqua.png" alignment="bottomleft" scaling="none"/>
   <title>${opts.name}</title>
 </installer-gui-script>
 `
