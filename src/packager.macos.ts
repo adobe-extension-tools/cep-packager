@@ -81,8 +81,7 @@ function pkgbuild(opts) {
   ].join(' ')
   opts.debug && console.log(pkgbuildCmd)
   const stdioOpts = opts.debug ? {stdio: 'inherit'} : { stdio: 'ignore' }
-  const pkgbuildCmdResult = execSync(pkgbuildCmd, stdioOpts)
-  opts.debug && console.log(pkgbuildCmdResult.toString())
+  execSync(pkgbuildCmd, stdioOpts)
 }
 
 function productbuild(opts) {
@@ -107,8 +106,7 @@ function productbuild(opts) {
     quote([opts.macOs.dest])
   ].join(' ')
   opts.debug && console.log(productbuildCmd)
-  const productbuildCmdResult = execSync(productbuildCmd).toString()
-  opts.debug && console.log(productbuildCmdResult)
+  execSync(productbuildCmd).toString()
 }
 
 export async function createWindowsInstallerOnMacOs(opts) {
