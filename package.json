@@ -4,16 +4,16 @@
   "description": "Create native macOS and Windows installers for your CEP",
   "main": "lib/index.js",
   "dependencies": {
-    "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
-    "rimraf": "^2.6.2",
-    "shell-quote": "^1.6.1",
+    "minimist": "^1.2.5",
+    "mkdirp": "^1.0.3",
+    "rimraf": "^3.0.2",
+    "shell-quote": "^1.7.2",
     "signcode": "^1.0.0",
     "zxp-sign-cmd": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^8.0.31",
-    "typescript": "^2.6.2"
+    "@types/node": "^13.9.3",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "tsc -w",

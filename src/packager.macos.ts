@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { execSync } from 'child_process'
+import { execSync, ExecSyncOptions } from 'child_process'
 import { writeFileSync, chmodSync } from 'fs'
 import { cp, cpr, mkdirp } from './utils'
 import { quote } from 'shell-quote'
@@ -80,7 +80,7 @@ function pkgbuild(opts) {
     quote([opts.paths.macOsInstallerFile])
   ].join(' ')
   opts.debug && console.log(pkgbuildCmd)
-  const stdioOpts = opts.debug ? {stdio: 'inherit'} : { stdio: 'ignore' }
+  const stdioOpts: ExecSyncOptions = opts.debug ? { stdio: 'inherit' } : { stdio: 'ignore' }
   execSync(pkgbuildCmd, stdioOpts)
 }
 
