@@ -12,4 +12,13 @@ if grep -q Failed "$LOG_FILE"; then
     echo "If you still experience issues, please contact us." >> "$LOG_FILE"
     exit 1
 fi
+if ! grep -q Successful "$LOG_FILE"; then
+    echo "ExManCmd did not produce any output, trying manual install"
+    rm /Library/Application\ Support/Adobe/CEP/extensions/${opts.bundleId} || true >> "$LOG_FILE" 2>&1
+    unzip ./bundle.zxp -d /Library/Application\ Support/Adobe/CEP/extensions/${opts.bundleId} || true >> "$LOG_FILE" 2>&1
+    defaults write com.adobe.CSXS.8 PlayerDebugMode 1
+    defaults write com.adobe.CSXS.9 PlayerDebugMode 1
+    defaults write com.adobe.CSXS.10 PlayerDebugMode 1
+    exit 1
+fi
 echo "Done." >> "$LOG_FILE"`
